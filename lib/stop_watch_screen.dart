@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:flutter/widgets.dart';
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 
 class StopWatchScreen extends StatefulWidget {
@@ -61,37 +62,54 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
         '${_time % 100}'.padLeft(2, '0'); //두자리로 표시할거고 두자이 아닌경우에는 0을 넣겠다.
     //이거 왜 했는데도 숫자가 움직일까요?
     return Scaffold(
+      backgroundColor: Color(0xffffffff),
       appBar: AppBar(
-        title: const Text('스톱워치'),
+        title: Center(child: const Text('Timer')),
+        backgroundColor: Color(0xFFFFFFFF),
       ),
       body: Column(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                '$sec',
-                style: const TextStyle(
-                  fontSize: 50,
+          SizedBox(
+            width: 400,
+            height: 400,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  top: 0,
+                  bottom: 0,
+                  child: Lottie.asset('assets/animation_1.json'),
                 ),
-              ),
-              Text(
-                '$hundredth',
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '$sec',
+                      style: const TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '$hundredth',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           SizedBox(
             width: 100,
-            height: 200,
+            height: 120,
             child: ListView(
               children: _lapTimes.map((e) => Center(child: Text(e))).toList(),
             ),
           ),
-          const Spacer(),
+          SizedBox(
+            height: 80,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -124,9 +142,6 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                 child: const Icon(Icons.add),
               ),
             ],
-          ),
-          const SizedBox(
-            height: 80,
           ),
         ],
       ),
