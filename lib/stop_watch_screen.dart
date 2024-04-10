@@ -15,7 +15,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
   int _time = 0;
   bool _isRunning = false;
 
-  List<String> _lapTimes = [];
+  final List<String> _lapTimes = [];
 
   void _clickButton() {
     _isRunning = !_isRunning;
