@@ -100,11 +100,9 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
               ],
             ),
           ),
-          Container(
-            child: const Text(
-              'Record',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+          const Text(
+            'Record',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
             height: 16,
