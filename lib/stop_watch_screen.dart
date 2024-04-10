@@ -47,7 +47,7 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
   }
 
   void _recordLapTime(String time) {
-    _lapTimes.insert(0, '${_lapTimes.length + 1}등 $time');
+    _lapTimes.insert(0, '${_lapTimes.length + 1}회 $time');
   }
 
   void dispose() {
@@ -62,10 +62,10 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
         '${_time % 100}'.padLeft(2, '0'); //두자리로 표시할거고 두자이 아닌경우에는 0을 넣겠다.
     //이거 왜 했는데도 숫자가 움직일까요?
     return Scaffold(
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
-        title: Center(child: const Text('Timer')),
-        backgroundColor: Color(0xFFFFFFFF),
+        title: const Center(child: Text('Time Record')),
+        backgroundColor: const Color(0xFFFFFFFF),
       ),
       body: Column(
         children: [
@@ -93,34 +93,50 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                     ),
                     Text(
                       '$hundredth',
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ],
             ),
           ),
-          SizedBox(
-            width: 100,
-            height: 120,
-            child: ListView(
-              children: _lapTimes.map((e) => Center(child: Text(e))).toList(),
+          Container(
+            child: const Text(
+              'Record',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
+          const SizedBox(
+            height: 16,
+          ),
           SizedBox(
-            height: 80,
+            width: 100,
+            height: 128,
+            child: ListView(
+              children: _lapTimes
+                  .map((e) => Center(
+                          child: Text(
+                        e,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
+                      )))
+                  .toList(),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               FloatingActionButton(
-                backgroundColor: Colors.orange,
+                backgroundColor: Colors.black,
                 onPressed: () {
                   setState(() {
                     _reset();
                   });
                 },
-                child: const Icon(Icons.refresh),
+                child: const Icon(Icons.refresh, color: Colors.white,),
               ),
               FloatingActionButton(
                 onPressed: () {
@@ -128,18 +144,19 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
                     _clickButton();
                   });
                 },
+                backgroundColor: const Color(0xFF00D4A9),
                 child: _isRunning
-                    ? const Icon(Icons.pause)
-                    : const Icon(Icons.play_arrow),
+                    ? const Icon(Icons.pause, color: Colors.white,)
+                    : const Icon(Icons.play_arrow, color: Colors.white,),
               ),
               FloatingActionButton(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.black,
                 onPressed: () {
                   setState(() {
                     _recordLapTime('$sec.$hundredth');
                   });
                 },
-                child: const Icon(Icons.add),
+                child: const Icon(Icons.add, color: Colors.white,),
               ),
             ],
           ),
